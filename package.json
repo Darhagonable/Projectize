@@ -12,12 +12,13 @@
     "webext-prod": {}
   },
   "scripts": {
-    "start": "parcel src/manifest.json --host localhost --target webext-dev --no-cache",
-    "build": "parcel build src/manifest.json --target webext-prod --no-cache"
+    "start": "parcel src/manifest.json --host localhost --target webext-dev",
+    "build": "parcel build src/manifest.json --target webext-prod"
   },
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "webextension-polyfill": "^0.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

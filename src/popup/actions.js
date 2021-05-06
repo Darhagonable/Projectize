@@ -1,20 +1,17 @@
-saveAllTabs.addEventListener("click", async () => {
-  let windows = await chrome.windows.getAll({populate:true})
-  chrome.storage.local.set({windows})
-  console.log("Save:")
-  console.log(windows)
-});
-
-loadAllTabs.addEventListener("click", async () => {
-  chrome.storage.local.get("windows", ({windows}) => {
-    generateWindows(windows)
-  })
-});
-
-
+import browser from "webextension-polyfill";
 Object.prototype.pick = function(keys) {
   return Object.fromEntries(keys.map(k=>[k, this[k]]))
 };
+
+export const handleSaveSession = async () => {
+  let windows = await browser.windows.getAll({populate:true})
+  browser.storage.local.set({windows})
+}
+
+export const loadLastSavedSession = async () => {
+  let {windows} = await browser.storage.local.get("windows")
+  generateWindows(windows)
+}
 
 async function generateWindows(windows) {
   for (const window of windows) {
@@ -30,9 +27,10 @@ async function generateWindows(windows) {
         createData = window.pick(["top", "left"]);
         break;
     }
-    const currentWindow = await chrome.windows.create(createData);
+    
+    const currentWindow = await browser.windows.create(createData);
     if (window.state == "maximized")
-      chrome.windows.update(currentWindow.id, { state: "maximized" });
+      browser.windows.update(currentWindow.id, { state: "maximized" });
     generateTabs(currentWindow, window.tabs);
   }
 }
@@ -41,7 +39,7 @@ function generateTabs(window, tabs) {
   const firstTabId = window.tabs[0].id;
   for(const tab of tabs) {
     const createProperties = tab.pick(["index", "pinned", "active", "url"])
-    chrome.tabs.create({...createProperties, windowId: window.id})
+    browser.tabs.create({...createProperties, windowId: window.id})
   }
-  chrome.tabs.remove(firstTabId);
+  browser.tabs.remove(firstTabId);
 }
