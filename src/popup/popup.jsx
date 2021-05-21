@@ -7,6 +7,8 @@ import {
   loadLastSavedSession
 } from "./actions";
 
+import "./style.scss";
+
 function Popup() {
 
   const getDisplays = () => {

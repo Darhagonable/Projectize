@@ -1,0 +1,37 @@
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-main: #dee1e6;
+    --bg-card: #fff;
+    --bg-color: #fff;
+    --text-color: black;
+    --card-border-color: #c4c8cd;
+    --card-divider-color: #e0e1e2;
+    --border-main-color: #dadce0;
+    --btn-hover-bg-color: hsl(0deg 0% 50% / 12%);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #202124;
+    --bg-card: #35363a;
+    --bg-color: #292a2d;
+    --text-color: white;
+    --card-border-color: #434446;
+    --card-divider-color: #555659;
+    --border-main-color: #282828;
+    --btn-hover-bg-color: hsl(0deg 0% 50% / 21%);
+  }
+}
+
+body {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-main-color);
+  margin: 0;
+  display: inline-table;
+}
+
+.list {
+  display: flex;
+  gap: 14px;
+  padding: 15px;
+}

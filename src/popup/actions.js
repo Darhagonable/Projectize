@@ -4,12 +4,12 @@ Object.prototype.pick = function(keys) {
 };
 
 export const handleSaveSession = async () => {
-  let windows = await browser.windows.getAll({populate:true})
+  const windows = await browser.windows.getAll({populate:true})
   browser.storage.local.set({windows})
 }
 
 export const loadLastSavedSession = async () => {
-  let {windows} = await browser.storage.local.get("windows")
+  const {windows} = await browser.storage.local.get("windows")
   generateWindows(windows)
 }
 
