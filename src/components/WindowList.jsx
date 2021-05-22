@@ -1,10 +1,13 @@
 import React, {useEffect} from "react";
+import { useCss, k } from "kremling";
 import browser from "webextension-polyfill";
 
 import WindowCard from "./WindowCard";
 import ProjectCard from "./ProjectCard";
 
 export default function WindowList() {
+  const scope = useCss(scss);
+
   const [windows, setWindows] = React.useState([])
 
   useEffect(async () => {
@@ -19,7 +22,7 @@ export default function WindowList() {
   }, [])
 
   return (
-    <div className="list">
+    <div className="list" {...scope}>
       <ProjectCard>
         {windows.map((window) => (
           <WindowCard key={window.id} window={window}/>
@@ -28,3 +31,11 @@ export default function WindowList() {
     </div>
   );
 }
+
+const scss = k`
+  .list {
+    display: flex;
+    gap: 14px;
+    padding: 15px;
+  }
+`;

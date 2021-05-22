@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useCss, k } from "kremling";
 
 import WindowList from "../components/WindowList";
 import {
@@ -7,22 +8,31 @@ import {
   loadLastSavedSession
 } from "./actions";
 
-import "./style.scss";
+import "../variables.css";
 
 function Popup() {
+  const scope = useCss(scss);
+  document.getElementById("root").setAttribute(...Object.entries(scope)[0])
 
   const getDisplays = () => {
     chrome.system.display.getInfo((layout) => console.log(layout))
   }
 
   return (
-    <React.Fragment>
+    < >
       <button onClick={handleSaveSession}>Save entire Session</button>
       <button onClick={loadLastSavedSession}>Load Session</button>
       <button onClick={getDisplays}>Log Display Info</button>
       <WindowList/>
-    </React.Fragment>
+    </>
   );
 }
+
+const scss = k`
+  #root {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-main-color);
+  }
+`;
 
 ReactDOM.render(<Popup/>, document.getElementById("root"));
