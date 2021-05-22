@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    ["module:kremling-babel-plugin", {
+      "namespace": "scope",
+      "sassOptions": {}
+    }]
+  ]
+}
