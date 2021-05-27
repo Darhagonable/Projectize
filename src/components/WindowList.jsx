@@ -1,16 +1,15 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useCss, k } from "kremling";
 import browser from "webextension-polyfill";
 
 import WindowCard from "./WindowCard";
-import ProjectCard from "./ProjectCard";
 
 export default function WindowList() {
   const scope = useCss(scss);
 
   const [windows, setWindows] = React.useState([])
 
-  useEffect(async () => {
+  React.useEffect(async () => {
     const tempWindows = await browser.windows.getAll({populate:true})
     for(const window of tempWindows) {
       const capturing = browser.tabs.captureVisibleTab(window.id, {quality: 12});
@@ -23,11 +22,9 @@ export default function WindowList() {
 
   return (
     <div className="list" {...scope}>
-      <ProjectCard>
-        {windows.map((window) => (
-          <WindowCard key={window.id} window={window}/>
-        ))}
-      </ProjectCard>
+      {windows.map((window) => (
+        <WindowCard key={window.id} window={window}/>
+      ))}
     </div>
   );
 }

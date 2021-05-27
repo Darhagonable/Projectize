@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useCss, k } from "kremling";
 
+import ProjectList from "../components/ProjectList";
 import WindowList from "../components/WindowList";
 import {
   handleSaveSession,
@@ -23,6 +24,7 @@ function Popup() {
       <button onClick={handleSaveSession}>Save entire Session</button>
       <button onClick={loadLastSavedSession}>Load Session</button>
       <button onClick={getDisplays}>Log Display Info</button>
+      <ProjectList/>
       <WindowList/>
     </>
   );
