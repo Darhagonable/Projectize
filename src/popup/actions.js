@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+
 Object.prototype.pick = function(keys) {
   return Object.fromEntries(keys.map(k=>[k, this[k]]))
 };
@@ -10,29 +11,14 @@ export const handleSaveSession = async () => {
 
 export const loadLastSavedSession = async () => {
   const {windows} = await browser.storage.local.get("windows")
-  generateWindows(windows)
+  windows.map(window => createWindow(window))
 }
 
-async function generateWindows(windows) {
-  for (const window of windows) {
-    let createData = {};
-    switch (window.state) {
-      case "minimized":
-        createData = window.pick(["state"]);
-        break;
-      case "normal":
-        createData = window.pick(["height", "width", "top", "left"]);
-        break;
-      case "maximized":
-        createData = window.pick(["top", "left"]);
-        break;
-    }
-    
-    const currentWindow = await browser.windows.create(createData);
-    if (window.state == "maximized")
-      browser.windows.update(currentWindow.id, { state: "maximized" });
-    generateTabs(currentWindow, window.tabs);
-  }
+async function createWindow(window) {
+  const createData = window.pick(["height", "width", "top", "left"]);
+  const currentWindow = await browser.windows.create(createData);
+  browser.windows.update(currentWindow.id, window.pick(["state"]));
+  generateTabs(currentWindow, window.tabs);
 }
 
 function generateTabs(window, tabs) {
