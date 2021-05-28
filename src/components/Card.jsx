@@ -1,13 +1,17 @@
 import React from "react";
 import { useCss, k } from "kremling";
+import { Draggable } from "react-beautiful-dnd";
 
-export function Card({children, filled}) {
+export function Card({children, filled, id, index}) {
   const scope = useCss(scss);
-
   return (
-    <div className={`card ${filled ? "filled" : ""}`} {...scope}>
-      {children}
-    </div>
+    <Draggable draggableId={id.toString()} index={index}>
+      {({innerRef, draggableProps, dragHandleProps}) => (
+        <div className={`card ${filled ? "filled" : ""}`} {...scope} ref={innerRef} {...draggableProps} {...dragHandleProps}>
+          {children}
+        </div>
+      )}
+    </Draggable>
   );
 }
 
@@ -48,9 +52,10 @@ const scss = k`
     border-radius: 9px;
     display: flex;
     flex-direction: column;
-    transition: 0.2s ease-in;
+    transition: border-color 0.2s ease-in, box-shadow 0.2s ease-in;
     overflow: hidden;
     color: var(--text-color);
+    margin-right: 14px;
 
     &.filled {
       background-color: var(--bg-card);

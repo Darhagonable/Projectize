@@ -3,7 +3,7 @@ import React from "react";
 
 import {Card, CardHeader, CardTitle, CardActions, CardContent} from "./Card"
 
-export default function WindowCard({window}) {
+export default function WindowCard({window, index}) {
   return (
     // <div className="windowCard">
     //   <div className="header">
@@ -17,7 +17,7 @@ export default function WindowCard({window}) {
     //   </div>
     // </div>
 
-    <Card filled>
+    <Card filled id={window.id} index={index}>
       <CardHeader>
         <CardTitle text={window.title}/>
         <CardActions>

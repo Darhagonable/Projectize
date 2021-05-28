@@ -15,8 +15,8 @@ export default function ProjectList() {
 
   return (
     <div className="list" {...scope}>
-      {projects.map((project) => (
-        <ProjectCard key={project.id} project={project}/>
+      {projects.map((project, index) => (
+        <ProjectCard key={project.id} project={project} index={index}/>
       ))}
       <button onClick={handleAdd}>New Project</button>
     </div>
