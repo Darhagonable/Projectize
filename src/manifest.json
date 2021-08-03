@@ -10,9 +10,11 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "browser_action": {
-    "default_popup": "popup/popup.html"
-  },
+  "browser_action": {},
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content-scripts.js"]
+  }],
   "permissions": [
     "storage", "tabs",  "activeTab", "<all_urls>", "system.display"
   ]
