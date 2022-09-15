@@ -1,0 +1,20 @@
+{
+  "name": "Projectize",
+  "description": "Project Oriented Browsing",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "action": {},
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "serviceWorker.ts"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ]
+}
