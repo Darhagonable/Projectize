@@ -16,5 +16,17 @@
     "tabs",
     "activeTab",
     "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": [ "<all_urls>" ],
+      "js": [ "../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js", "contentScript.ts" ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "options/options.html" ],
+      "matches": [ "<all_urls>" ]
+    }
   ]
 }
