@@ -5,7 +5,7 @@
   "manifest_version": 3,
   "action": {},
   "options_ui": {
-    "page": "options/options.html",
+    "page": "options/index.html",
     "open_in_tab": true
   },
   "background": {
@@ -25,7 +25,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": [ "options/options.html" ],
+      "resources": [ "options/index.html" ],
       "matches": [ "<all_urls>" ]
     }
   ]
