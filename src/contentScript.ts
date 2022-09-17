@@ -1,7 +1,7 @@
 class ProjectizePanel extends HTMLElement {
   connectedCallback() {
     const iframe = document.createElement("iframe");
-    iframe.src = `chrome-extension://${chrome.runtime.id}/options/index.html#/panel`;
+    iframe.src = chrome.runtime.getURL("options/index.html#/panel");
     iframe.style.border = "none";
     iframe.style.position = "fixed";
     iframe.style.zIndex = "2147483647";
