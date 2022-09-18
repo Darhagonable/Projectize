@@ -46,11 +46,13 @@ class ProjectizePanel extends HTMLElement {
         iframe.style.height = "250px";
         break;
       case "Left":
+        iframe.style.top = "0";
         iframe.style.left = "0";
         iframe.style.width = "250px";
         iframe.style.height = "100%";
         break;
       case "Right":
+        iframe.style.top = "0";
         iframe.style.right = "0";
         iframe.style.width = "250px";
         iframe.style.height = "100%";
