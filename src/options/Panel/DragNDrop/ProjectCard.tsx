@@ -1,12 +1,11 @@
-import { Draggable, DraggableStyle } from "@hello-pangea/dnd";
+import { Draggable } from "@hello-pangea/dnd";
 import WindowsList from "./WindowsList";
 
-const getItemStyle = (isDragging: boolean, draggableStyle?: DraggableStyle ): React.CSSProperties => ({
+const getItemStyle = (isDragging: boolean): React.CSSProperties => ({
   userSelect: "none",
   padding: 8,
   marginBottom: 8,
-  background: isDragging ? "lightgreen" : "grey",
-  ...draggableStyle
+  background: isDragging ? "lightgreen" : "grey"
 });
 
 
@@ -18,12 +17,12 @@ interface Props {
 export default function ProjectCard({ project, index }: Props) {
   return (
     <Draggable key={project.id} draggableId={project.id} index={index}>
-      {(provided, snapshot) => (
+      {({innerRef, draggableProps, dragHandleProps}, snapshot) => (
         <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
-          {...provided.dragHandleProps}
+          ref={innerRef}
+          {...draggableProps}
+          style={{...getItemStyle(snapshot.isDragging), ...draggableProps.style}}
+          {...dragHandleProps}
         >
           {project.name}
           <WindowsList windows={project.windows} type={project.id}/>

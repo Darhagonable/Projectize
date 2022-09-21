@@ -76,15 +76,12 @@ export default function ProjectList() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable" type="droppableItem">
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-          >
+        {({innerRef, placeholder}, snapshot) => (
+          <div ref={innerRef} style={getListStyle(snapshot.isDraggingOver)}>
             {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index}/>
             ))}
-            {provided.placeholder}
+            {placeholder}
           </div>
         )}
       </Droppable>

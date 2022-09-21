@@ -1,11 +1,10 @@
-import { Draggable, DraggableStyle } from "@hello-pangea/dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
-const getItemStyle = (isDragging: boolean, draggableStyle?: DraggableStyle ): React.CSSProperties => ({
+const getItemStyle = (isDragging: boolean): React.CSSProperties => ({
   userSelect: "none",
   background: isDragging ? "lightgreen" : "grey",
   padding: "10px",
-  marginBottom: "10px",
-  ...draggableStyle
+  marginBottom: "10px"
 });
 
 
@@ -17,12 +16,12 @@ interface Props {
 export default function WindowCard({ window, index }: Props) {
   return (
     <Draggable key={window.id} draggableId={window.id} index={index}>
-      {(provided, snapshot) => (
+      {({innerRef, draggableProps, dragHandleProps}, snapshot) => (
         <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
-          {...provided.dragHandleProps}
+          ref={innerRef}
+          {...draggableProps}
+          style={{...getItemStyle(snapshot.isDragging), ...draggableProps.style}}
+          {...dragHandleProps}
         >
           {window.name}
         </div>

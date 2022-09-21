@@ -17,12 +17,12 @@ interface Props {
 export default function WindowsList({ windows, type }: Props) {
   return (
     <Droppable droppableId={type} type="droppableSubItem">
-      {(provided, snapshot) => (
-        <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+      {({innerRef, placeholder}, snapshot) => (
+        <div ref={innerRef} style={getListStyle(snapshot.isDraggingOver)}>
           {windows.map((window, index) => (
             <WindowCard key={window.id} window={window} index={index}/>
           ))}
-          {provided.placeholder}
+          {placeholder}
         </div>
       )}
     </Droppable>
