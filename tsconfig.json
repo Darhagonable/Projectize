@@ -19,7 +19,14 @@
     "noImplicitAny": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "/*",
+        "options/*",
+        "popup/*"
+      ]
+    }
   },
   "include": [
     "./src"

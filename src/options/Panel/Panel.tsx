@@ -1,4 +1,4 @@
-import ProjectList from "./DragNDrop/ProjectList";
+import ProjectList from "Components/ProjectList";
 
 export default function Panel() {
   return (
