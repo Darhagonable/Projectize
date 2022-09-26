@@ -1,4 +1,5 @@
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
+import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 import mockData from "./mockData";
 import ProjectCard from "./ProjectCard";
@@ -9,12 +10,6 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   result.splice(endIndex, 0, removed);
   return result;
 }
-
-const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: 8,
-  width: 200
-});
 
 export default function ProjectList() {
   const [projects, setProjects] = useState(mockData);
@@ -75,14 +70,15 @@ export default function ProjectList() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable" type="droppableItem">
+      <Droppable droppableId="droppable" type="droppableItem" direction="horizontal">
         {({innerRef, placeholder}, snapshot) => (
-          <div ref={innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+          <Stack spacing={2} direction="row" ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
+            <Box m={-1}/>
             {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index}/>
             ))}
             {placeholder}
-          </div>
+          </Stack>
         )}
       </Droppable>
     </DragDropContext>

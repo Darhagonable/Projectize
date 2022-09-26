@@ -1,17 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter, Routes, Route } from "react-router-dom";
-import Options from "./Options/Options";
-import Panel from "./Panel/Panel";
+import { ThemeProvider, CssBaseline, useMediaQuery, createTheme  } from "@mui/material";
+import Router from "./Router";
 
 function App() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = createTheme({
+    palette: {
+      mode: prefersDarkMode ? "dark" : "light",
+      ...(prefersDarkMode
+        ? {
+          background: {
+            default: "#202124",
+            paper: "#35363a"
+          },
+          divider: "#434446"
+        }
+        : {
+          background: {
+            default: "#dee1e6",
+            paper: "#fff"
+          },
+          divider: "#c4c8cd"
+        }
+      )
+    },
+    shape: {
+      borderRadius: 9
+    },
+    components: {
+      MuiCard: {
+        defaultProps: {
+          variant: "outlined"
+        }
+      }
+    }
+  });
+
   return (
-    <HashRouter>
-      <Routes>
-        <Route index element={<Options/>}/>
-        <Route path="panel" element={<Panel/>}/>
-      </Routes>
-    </HashRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <Router/>
+    </ThemeProvider>
   );
 }
 
