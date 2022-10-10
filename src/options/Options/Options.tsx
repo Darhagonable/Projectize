@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
+import { useChromeStorageSync } from "use-chrome-storage";
 
-const positions: Array<ChromeStorage["position"]> = ["Top", "Bottom", "Right", "Left"];
+const positions: Array<Position> = ["Top", "Bottom", "Right", "Left"];
 
 export default function Options() {
-  const [currentPosition, setCurrentPossition] = useState<ChromeStorage["position"]>();
-
-  function getStoredPosition() {
-    chrome.storage.sync.get("position", ({position}) => {
-      setCurrentPossition(position);
-    });
-  }
+  const [currentPosition, setPosition] = useChromeStorageSync<Position>("position");
 
   function handleButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    const position = event.currentTarget.dataset.position;
-    chrome.storage.sync.set({position}, getStoredPosition);
+    const newPosition = event.currentTarget.dataset.position as Position;
+    setPosition(newPosition);
   }
-
-  useEffect(() => {
-    getStoredPosition();
-  }, []);
 
   return (
     <div>

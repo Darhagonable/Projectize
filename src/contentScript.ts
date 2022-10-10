@@ -24,7 +24,7 @@ class ProjectizePanel extends HTMLElement {
     iframe.style.visibility === "hidden" ? iframe.style.visibility = "visible" : iframe.style.visibility = "hidden";
   }
 
-  setPosition(position: ChromeStorage["position"]) {
+  setPosition(position: Position) {
     const iframe = this.querySelector("iframe");
     if(!iframe)
       throw new Error("Iframe wasn't found");

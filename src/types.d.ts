@@ -1,5 +1,8 @@
+type Position = "Top" | "Bottom" | "Right" | "Left";
+type Orientation = "horizontal" | "vertical";
+
 interface ChromeStorage {
-  position: "Top" | "Bottom" | "Right" | "Left"
+  position: Position
 }
 
 interface Tab {

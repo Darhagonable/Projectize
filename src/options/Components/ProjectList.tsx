@@ -5,18 +5,28 @@ import dragHandler from "Utils/dragHandler";
 import mockData from "Utils/mockData";
 import ProjectCard from "./ProjectCard";
 
-export default function ProjectList() {
+const orientToDirect: Record<Orientation, "row" | "column"> = {
+  horizontal: "row",
+  vertical: "column"
+};
+
+interface Props {
+  orientation: Orientation
+}
+
+export default function ProjectList({ orientation }: Props) {
   const [projects, setProjects] = useState(mockData);
 
   return (
     <DragDropContext onDragEnd={(result) => dragHandler(result, projects, setProjects)}>
-      <Droppable droppableId="droppable" type="droppableItem" direction="horizontal">
+      <Droppable droppableId="droppable" type="droppableItem" direction={orientation}>
         {({innerRef, placeholder}, snapshot) => (
-          <Stack spacing={2} direction="row" ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
+          <Stack spacing={2} direction={orientToDirect[orientation]} ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
             <Box m={-1}/>
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index}/>
-            ))}
+            {projects.map((project, index) => ({
+              horizontal: <ProjectCard key={project.id} project={project} index={index}/>,
+              vertical: <ProjectCard key={project.id} project={project} index={index}/>
+            }[orientation]))}
             {placeholder}
           </Stack>
         )}
