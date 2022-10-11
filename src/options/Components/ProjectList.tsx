@@ -17,12 +17,14 @@ interface Props {
 export default function ProjectList({ orientation }: Props) {
   const [projects, setProjects] = useState(mockData);
 
+  const spacing = 2;
+
   return (
     <DragDropContext onDragEnd={(result) => dragHandler(result, projects, setProjects)}>
       <Droppable droppableId="droppable" type="droppableItem" direction={orientation}>
         {({innerRef, placeholder}, snapshot) => (
-          <Stack spacing={2} direction={orientToDirect[orientation]} ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
-            <Box m={-1}/>
+          <Stack spacing={spacing} direction={orientToDirect[orientation]} ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
+            <Box m={-spacing / 2}/>
             {projects.map((project, index) => ({
               horizontal: <ProjectCard key={project.id} project={project} index={index}/>,
               vertical: <ProjectCard key={project.id} project={project} index={index}/>
