@@ -1,12 +1,6 @@
 import { Draggable } from "@hello-pangea/dnd";
-
-const getItemStyle = (isDragging: boolean): React.CSSProperties => ({
-  userSelect: "none",
-  background: isDragging ? "lightgreen" : "grey",
-  padding: "10px",
-  marginBottom: "10px"
-});
-
+import { Card, CardHeader, Divider, IconButton, useTheme } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   window: ChromeWindow
@@ -14,17 +8,42 @@ interface Props {
 }
 
 export default function WindowCard({ window, index }: Props) {
+  const { palette } = useTheme();
+
+  const hoverStyle = {
+    borderColor: palette.primary.main,
+    boxShadow: `${palette.primary.main} 0 0 0 1px`
+  };
+
   return (
     <Draggable key={window.id} draggableId={window.id} index={index}>
       {({innerRef, draggableProps, dragHandleProps}, snapshot) => (
-        <div
+        <Card
           ref={innerRef}
+          className="window-card"
+          sx={{
+            bgcolor: "background.paper",
+            "&:hover": hoverStyle,
+            ...(snapshot.isDragging && hoverStyle)
+          }}
           {...draggableProps}
-          style={{...getItemStyle(snapshot.isDragging), ...draggableProps.style}}
           {...dragHandleProps}
         >
-          {window.name}
-        </div>
+          <CardHeader
+            title={window.name}
+            action={
+              < >
+                <IconButton sx={{p: .5}}>
+                  <CloseIcon sx={{fontSize: 15}}/>
+                </IconButton>
+              </>
+            }
+            titleTypographyProps={{fontSize: 13}}
+            sx={{p: 1.4}}
+            {...dragHandleProps}
+          />
+          <Divider/>
+        </Card>
       )}
     </Draggable>
   );

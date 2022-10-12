@@ -1,29 +1,32 @@
 import { Droppable } from "@hello-pangea/dnd";
+import { Box, Stack } from "@mui/material";
 import WindowCard from "./WindowCard";
 
-const grid = 8;
+const orientToDirect: Record<Orientation, "row" | "column"> = {
+  horizontal: "row",
+  vertical: "column"
+};
 
-const getListStyle = (isDraggingOver: boolean) => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  margin: "10px 0"
-});
+const spacing = 1.75;
 
 interface Props {
   windows: Array<ChromeWindow>
-  type: string
+  projectId: string
+  orientation: Orientation
 }
 
-export default function WindowsList({ windows, type }: Props) {
+export default function WindowsList({ windows, projectId, orientation }: Props) {
   return (
-    <Droppable droppableId={type} type="droppableSubItem">
+    <Droppable droppableId={projectId} type="droppableSubItem" direction={orientation}>
       {({innerRef, placeholder}, snapshot) => (
-        <div ref={innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-          {windows.map((window, index) => (
-            <WindowCard key={window.id} window={window} index={index}/>
-          ))}
+        <Stack spacing={spacing} height={1} direction={orientToDirect[orientation]} ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
+          <Box m={-spacing / 2}/>
+          {windows.map((window, index) => ({
+            horizontal: <WindowCard key={window.id} window={window} index={index}/>,
+            vertical: <WindowCard key={window.id} window={window} index={index}/>
+          }[orientation]))}
           {placeholder}
-        </div>
+        </Stack>
       )}
     </Droppable>
   );
