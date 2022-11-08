@@ -3,7 +3,7 @@ import { Card, CardHeader, Divider, IconButton, useTheme } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
-  window: ChromeWindow
+  window: ProjectizeWindow
   index: number
 }
 
@@ -16,7 +16,7 @@ export default function WindowCard({ window, index }: Props) {
   };
 
   return (
-    <Draggable key={window.id} draggableId={window.id} index={index}>
+    <Draggable key={window.id} draggableId={String(window.id)} index={index}>
       {({innerRef, draggableProps, dragHandleProps}, snapshot) => (
         <Card
           ref={innerRef}
@@ -30,7 +30,7 @@ export default function WindowCard({ window, index }: Props) {
           {...dragHandleProps}
         >
           <CardHeader
-            title={window.name}
+            title={window.title}
             action={
               < >
                 <IconButton sx={{p: .5}}>

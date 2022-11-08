@@ -20,7 +20,7 @@ export default function ProjectCard({ project, index, orientation }: Props) {
   };
 
   return (
-    <Draggable key={project.id} draggableId={project.id} index={index}>
+    <Draggable key={project.id} draggableId={String(project.id)} index={index}>
       {({innerRef, draggableProps, dragHandleProps}, snapshot) => (
         <Card
           ref={innerRef}
@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index, orientation }: Props) {
           {...draggableProps}
         >
           <CardHeader
-            title={project.name}
+            title={project.title}
             action={
               < >
                 <IconButton sx={{p: .5}}>

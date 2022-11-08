@@ -16,13 +16,13 @@ export default function onDragHandler({ source, destination, type }: DropResult,
     const newProjects = reorder(projects, sourceIndex, destIndex);
     setProjects(newProjects);
   } else if (type === "droppableSubItem") {
-    const itemSubItemMap = projects.reduce<Record<string, ChromeWindow[]>>((acc, item) => {
+    const itemSubItemMap = projects.reduce<Record<string, ProjectizeWindow[]>>((acc, item) => {
       acc[item.id] = item.windows;
       return acc;
     }, {});
 
-    const sourceParentId = source.droppableId;
-    const destParentId = destination.droppableId;
+    const sourceParentId = Number(source.droppableId);
+    const destParentId = Number(destination.droppableId);
 
     const sourceSubItems = itemSubItemMap[sourceParentId];
     const destSubItems = itemSubItemMap[destParentId];

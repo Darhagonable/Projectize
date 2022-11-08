@@ -44,7 +44,7 @@ export default function Panel() {
       {position && (
         <DragDropContext onDragEnd={(result) => dragHandler(result, projects, setProjects)}>
           <ProjectList projects={projects} orientation={orientation[position]}/>
-          <WindowsList windows={windows.map(window => ({...window, id: String(window.id)})) as unknown as ChromeWindow[]} projectId="untracked" orientation={orientation[position]}/>
+          <WindowsList windows={windows.map(window => window as unknown as ProjectizeWindow)} projectId={-1} orientation={orientation[position]}/>
         </DragDropContext>
       )}
     </div>

@@ -1,47 +1,50 @@
 const mockData: Array<Project> = [
   {
-    id: "p0",
-    name: "Project 0",
+    id: 0,
+    title: "Project 0",
     windows: [
       {
-        id: "w0",
-        name: "Window 0",
+        id: 1,
+        title: "Window 0",
         tabs: [
           {
-            id: "t0",
-            name: "Tab 0"
+            id: 2,
+            title: "Tab 0",
+            windowId: 1
           }
         ]
       }
     ]
   },
   {
-    id: "p1",
-    name: "Project 1",
+    id: 3,
+    title: "Project 1",
     windows: [
       {
-        id: "w1",
-        name: "Window 1",
+        id: 4,
+        title: "Window 1",
         tabs: [
           {
-            id: "t1",
-            name: "Tab 1"
+            id: 5,
+            title: "Tab 1",
+            windowId: 4
           }
         ]
       }
     ]
   },
   {
-    id: "p2",
-    name: "Project 2",
+    id: 6,
+    title: "Project 2",
     windows: [
       {
-        id: "w2",
-        name: "Window 2",
+        id: 7,
+        title: "Window 2",
         tabs: [
           {
-            id: "t2",
-            name: "Tab 2"
+            id: 8,
+            title: "Tab 2",
+            windowId: 7
           }
         ]
       }

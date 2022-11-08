@@ -10,14 +10,14 @@ const orientToDirect: Record<Orientation, "row" | "column"> = {
 const spacing = 1.75;
 
 interface Props {
-  windows: Array<ChromeWindow>
-  projectId: string
+  windows: Array<ProjectizeWindow>
+  projectId: number
   orientation: Orientation
 }
 
 export default function WindowsList({ windows, projectId, orientation }: Props) {
   return (
-    <Droppable droppableId={projectId} type="droppableSubItem" direction={orientation}>
+    <Droppable droppableId={String(projectId)} type="droppableSubItem" direction={orientation}>
       {({innerRef, placeholder}, snapshot) => (
         <Stack spacing={spacing} height={1} direction={orientToDirect[orientation]} ref={innerRef} sx={[snapshot.isDraggingOver && {pointerEvents: "none"}]}>
           <Box m={-spacing / 2}/>

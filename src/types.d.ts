@@ -5,19 +5,30 @@ interface ChromeStorage {
   position: Position
 }
 
-interface Tab {
-  id: string
-  name: string
+interface ProjectizeTab {
+  id: number
+  title: string
+  windowId: number
+  index?: number
+  url?: string
+  pinned?: boolean
+  favIconUrl?: string
 }
 
-interface ChromeWindow {
-  id: string
-  name: string
-  tabs: Array<Tab>
+interface ProjectizeWindow {
+  id: number
+  title: string
+  tabs: Array<ProjectizeTab>
+  top?: number
+  left?: number
+  height?: number
+  width?: number
+  state?: windowStateEnum
+  thumbnail?: string
 }
 
 interface Project {
-  id: string
-  name: string
-  windows: Array<ChromeWindow>
+  id: number
+  title: string
+  windows: Array<ProjectizeWindow>
 }
