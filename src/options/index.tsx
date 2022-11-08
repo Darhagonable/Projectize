@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider, CssBaseline, useMediaQuery, createTheme  } from "@mui/material";
 import Router from "./Router";
 
+import "Utils/pick";
+
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
